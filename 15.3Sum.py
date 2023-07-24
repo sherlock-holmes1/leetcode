@@ -12,18 +12,7 @@ class Solution:
             third =  length - 1
 
             while second < third:
-                if first_num == nums[second]:
-                    second += 1
-                    continue
-
-                if first_num == nums[third]:
-                    third -= 1
-                    continue
                 
-                if nums[second] == nums[third]:
-                    second += 1
-                    continue
-
                 summa = first_num + nums[second] + nums[third]
                 if summa > 0:
                     third -= 1
@@ -32,7 +21,10 @@ class Solution:
                     second += 1
 
                 else:
-                    res.append([first_num, nums[second], nums[third]])
+                    try:
+                        ind = res.index([first_num, nums[second], nums[third]])
+                    except:
+                        res.append([first_num, nums[second], nums[third]])
                     second += 1
 
         return res
