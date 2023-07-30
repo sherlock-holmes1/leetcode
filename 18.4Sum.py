@@ -7,37 +7,30 @@ class Solution:
             return []
         
         nums.sort()
-        p_first = 0
-        p_last = len(nums) - 1
-        res = []
+        res = set()
         sum = 0
-        move_last = True
 
-        while p_first < p_last:
-            p_second = p_first + 1
-            p_third = p_last - 1
+        for i in range(len(nums)):
+            for j in range (i + 1, len(nums)):
 
-            while p_second < p_third:
-                sum = nums[p_first] + nums[p_second] + nums[p_third] + nums[p_last]
-                
-                if sum == target:
-                    if [nums[p_first], nums[p_second], nums[p_third], nums[p_last]] not in res:
-                        res.append([nums[p_first], nums[p_second], nums[p_third], nums[p_last]]) 
+                p_second = j + 1
+                p_third = len(nums) - 1
 
-                    p_second += 1
-                if sum > target:
-                    p_third -= 1
-                if sum < target:
-                    p_second += 1
+                while p_second < p_third:
+                    sum = nums[i] + nums[j] + nums[p_second] + nums[p_third]
+                    
+                    if sum == target:
+                        res.add((nums[i], nums[j], nums[p_second], nums[p_third])) 
+                        p_second += 1
+                        p_third -= 1
+
+                    if sum > target:
+                        p_third -= 1
+                    if sum < target:
+                        p_second += 1
             
-            if move_last:
-                p_last -= 1
-                move_last = False
-            else:
-                p_first += 1
-                move_last = True
 
-        return res
+        return list(res)
 
 s = Solution()
 r = s.fourSum([1,0,-1,0,-2,2], 0)
