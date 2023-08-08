@@ -20,7 +20,7 @@ public class Solution {
 
         for (repl = n - 1; repl > i + 1; repl--)
         {
-            if (nums[i] > nums[repl])
+            if (nums[i] < nums[repl])
             {
                 break;
             }
